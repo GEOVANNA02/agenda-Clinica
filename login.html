@@ -1,0 +1,56 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Sistema de Agenda</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="width: 320px;">
+    <h3 class="mb-3 text-center">Login</h3>
+    <form id="login-form">
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuário</label>
+        <input type="text" id="username" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" id="password" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+      <div id="login-error" class="mt-3 text-danger text-center" style="display:none;"></div>
+    </form>
+  </div>
+
+  <script>
+    // Usuários hardcoded para teste: [username, password, role]
+    const usuarios = [
+      { username: 'admin', password: 'admin123', role: 'admin' },
+      { username: 'medico1', password: 'med123', role: 'medico' },
+      { username: 'recep', password: 'recep123', role: 'recepcionista' }
+    ];
+
+    const form = document.getElementById('login-form');
+    const errorDiv = document.getElementById('login-error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const user = usuarios.find(u => u.username === username && u.password === password);
+
+      if(user) {
+        // Salva sessão no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify({ username: user.username, role: user.role }));
+        window.location.href = 'index.html'; // Redireciona para sistema
+      } else {
+        errorDiv.textContent = 'Usuário ou senha inválidos.';
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
