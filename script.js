@@ -1,4 +1,18 @@
 window.onload = () => {
+  let doutores = JSON.parse(localStorage.getItem('doutores')) || [];
+let consultas = JSON.parse(localStorage.getItem('consultas')) || [];
+
+const doutorForm = document.getElementById('doutor-form');
+const doutorNome = document.getElementById('doutor-nome');
+const doutoresLista = document.getElementById('doutores-lista');
+const selectDoutor = document.getElementById('agendamento-doutor');
+
+const consultaForm = document.getElementById('consulta-form');
+const consultaNome = document.getElementById('consulta-nome');
+const consultasLista = document.getElementById('consultas-lista');
+const selectConsulta = document.getElementById('agendamento-consulta');
+
+
   const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
   if (!usuarioLogado) {
     window.location.href = 'login.html';
@@ -293,6 +307,62 @@ function excluirCliente(index) {
     });
   });
 
+  function renderDoutores() {
+  doutoresLista.innerHTML = '';
+  selectDoutor.innerHTML = '<option disabled selected>Selecione um doutor</option>';
+  doutores.forEach((nome, index) => {
+    const li = document.createElement('li');
+    li.className = 'list-group-item d-flex justify-content-between align-items-center';
+    li.textContent = nome;
+    doutoresLista.appendChild(li);
+
+    const option = document.createElement('option');
+    option.value = nome;
+    option.textContent = nome;
+    selectDoutor.appendChild(option);
+  });
+}
+
+function renderConsultas() {
+  consultasLista.innerHTML = '';
+  selectConsulta.innerHTML = '<option disabled selected>Selecione a consulta</option>';
+  consultas.forEach((nome, index) => {
+    const li = document.createElement('li');
+    li.className = 'list-group-item d-flex justify-content-between align-items-center';
+    li.textContent = nome;
+    consultasLista.appendChild(li);
+
+    const option = document.createElement('option');
+    option.value = nome;
+    option.textContent = nome;
+    selectConsulta.appendChild(option);
+  });
+}
+doutorForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const nome = doutorNome.value.trim();
+  if (nome) {
+    doutores.push(nome);
+    localStorage.setItem('doutores', JSON.stringify(doutores));
+    renderDoutores();
+    doutorForm.reset();
+  }
+});
+
+consultaForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const nome = consultaNome.value.trim();
+  if (nome) {
+    consultas.push(nome);
+    localStorage.setItem('consultas', JSON.stringify(consultas));
+    renderConsultas();
+    consultaForm.reset();
+  }
+});
+
   // Inicialização
   renderClientes();
+  renderDoutores();
+renderConsultas();
+
 }

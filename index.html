@@ -28,6 +28,13 @@
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="relatorios-tab" data-bs-toggle="tab" data-bs-target="#relatorios" type="button" role="tab" aria-controls="relatorios" aria-selected="false">Relatórios</button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="doutores-tab" data-bs-toggle="tab" data-bs-target="#doutores" type="button" role="tab" aria-controls="doutores" aria-selected="false">Doutores</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="consultas-tab" data-bs-toggle="tab" data-bs-target="#consultas" type="button" role="tab" aria-controls="consultas" aria-selected="false">Consultas</button>
+   </li>
+
     </ul>
 
     <div class="tab-content" id="menuTabsContent">
@@ -78,10 +85,14 @@
             <input type="time" id="agendamento-hora" class="form-control" required />
           </div>
           <div class="col-md-3">
-            <input type="text" id="agendamento-doutor" class="form-control" placeholder="Nome do Doutor" required />
+            <select id="agendamento-doutor" class="form-select" required>
+              <option value="" disabled selected>Selecione um doutor</option>
+            </select>
           </div>
           <div class="col-md-4">
-            <input type="text" id="agendamento-consulta" class="form-control" placeholder="Nome da Consulta" required />
+           <select id="agendamento-consulta" class="form-select" required>
+              <option value="" disabled selected>Selecione a consulta</option>
+           </select>
           </div>
           <div class="col-md-3">
             <input type="text" id="agendamento-local" class="form-control" placeholder="Local" required />
@@ -125,6 +136,34 @@
         <button id="btn-gerar-relatorio" class="btn btn-info mb-3">Gerar Relatório</button>
         <div id="relatorio-result" class="table-responsive" style="max-height: 350px; overflow-y: auto;"></div>
       </section>
+
+      <!-- Doutores -->
+<section class="tab-pane fade" id="doutores" role="tabpanel" aria-labelledby="doutores-tab">
+  <h2 class="h5 mb-3">Cadastro de Doutores</h2>
+  <form id="doutor-form" class="row g-3 mb-3">
+    <div class="col-md-6">
+      <input type="text" id="doutor-nome" class="form-control" placeholder="Nome do Doutor" required />
+    </div>
+    <div class="col-md-2 d-grid">
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+    </div>
+  </form>
+  <ul id="doutores-lista" class="list-group"></ul>
+</section>
+
+<!-- Consultas -->
+<section class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
+  <h2 class="h5 mb-3">Cadastro de Tipos de Consulta</h2>
+  <form id="consulta-form" class="row g-3 mb-3">
+    <div class="col-md-6">
+      <input type="text" id="consulta-nome" class="form-control" placeholder="Nome da Consulta" required />
+    </div>
+    <div class="col-md-2 d-grid">
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+    </div>
+  </form>
+  <ul id="consultas-lista" class="list-group"></ul>
+</section>
 
     </div>
   </main>
