@@ -45,7 +45,7 @@
       if(user) {
         // Salva sessão no localStorage
         localStorage.setItem('usuarioLogado', JSON.stringify({ username: user.username, role: user.role }));
-        window.location.href = 'index.html'; // Redireciona para sistema
+       window.location.href = 'index.html?v=' + new Date().getTime();// Redireciona para sistema
       } else {
         errorDiv.textContent = 'Usuário ou senha inválidos.';
         errorDiv.style.display = 'block';
